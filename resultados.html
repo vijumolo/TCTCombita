@@ -1,0 +1,864 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XXIII CLASICA ALCALDIA Y CONCEJO DE COMBITA 2026 - Resultados</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Integrado -->
+    <style>
+        :root {
+            /* Colores Principales */
+            --bg-dark: #111214;
+            --bg-surface: #1e2127;
+            --bg-surface-light: #2a2e35;
+            --color-red: #E31E24;
+            --color-red-hover: #ff2a31;
+            --color-green: #1B7E3B;
+            --text-main: #ffffff;
+            --text-muted: #a0aab8;
+            --border-color: #2c313a;
+
+            /* Medallas */
+            --gold: #FFD700;
+            --silver: #E0E0E0;
+            --bronze: #CD7F32;
+
+            /* TipografÃ­a */
+            --font-main: 'Inter', sans-serif;
+            --font-headings: 'Barlow Condensed', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Utilidades */
+        .hidden {
+            display: none !important;
+        }
+
+        /* ---------------------------------
+           HEADER STYLES
+           --------------------------------- */
+        .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(17, 18, 20, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--color-red);
+            padding: 1rem 0 0 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 0 20px 15px 20px;
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .header-text h1 {
+            font-family: var(--font-headings);
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .header-text h2 {
+            font-family: var(--font-headings);
+            font-size: 1.2rem;
+            color: var(--color-red);
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .stats-bar {
+            background-color: var(--bg-surface);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stats-bar span strong {
+            color: var(--text-muted);
+            margin-right: 5px;
+        }
+
+        /* ---------------------------------
+           MAIN CONTAINER
+           --------------------------------- */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* ---------------------------------
+           FILTERS
+           --------------------------------- */
+        .filters-container {
+            background-color: var(--bg-surface);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px 15px;
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            border-radius: 6px;
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input::placeholder {
+            color: var(--text-muted);
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--color-red);
+            box-shadow: 0 0 0 2px rgba(227, 30, 36, 0.2);
+        }
+
+        .btn-clear {
+            background-color: var(--bg-surface-light);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-weight: 500;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-clear:hover {
+            background-color: #3b404a;
+        }
+
+        /* ---------------------------------
+           TABS
+           --------------------------------- */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            /* Hide scrollbar for tabs */
+            scrollbar-width: none;
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            background-color: var(--bg-surface);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: var(--font-headings);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            background-color: var(--bg-surface-light);
+            color: var(--text-main);
+        }
+
+        .tab-btn.active {
+            background-color: var(--color-red);
+            color: white;
+            border-color: var(--color-red);
+            box-shadow: 0 4px 10px rgba(227, 30, 36, 0.3);
+        }
+
+        /* ---------------------------------
+           RESULTS CARD & TABLE
+           --------------------------------- */
+        .results-card {
+            background-color: var(--bg-surface);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h3 {
+            font-family: var(--font-headings);
+            font-size: 1.5rem;
+            color: var(--color-green);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-count {
+            background-color: var(--bg-surface-light);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            min-height: 200px;
+            position: relative;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .results-table th {
+            font-family: var(--font-headings);
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            padding: 15px 20px;
+            background-color: var(--bg-surface);
+            border-bottom: 2px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        .results-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .results-table tbody tr {
+            transition: background-color 0.2s;
+        }
+
+        .results-table tbody tr:hover {
+            background-color: var(--bg-surface-light);
+        }
+
+        /* Estilos Especiales -> POS 1, 2, 3 y DNF */
+        .pos-medal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-weight: 700;
+            color: #000;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .pos-1 {
+            background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+        }
+
+        .pos-2 {
+            background: radial-gradient(ellipse farthest-corner at right bottom, #E0E0E0 0%, #BDBDBD 8%, #9E9E9E 30%, #757575 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #EEEEEE 8%, #BDBDBD 25%, #616161 62.5%, #616161 100%);
+        }
+
+        .pos-3 {
+            background: radial-gradient(ellipse farthest-corner at right bottom, #E2A277 0%, #CD7F32 8%, #A0522D 30%, #8B4513 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFDAB9 8%, #CD7F32 25%, #5C3A21 62.5%, #5C3A21 100%);
+            color: #fff;
+        }
+
+        .row-dnf {
+            background-color: rgba(227, 30, 36, 0.1) !important;
+            opacity: 0.85;
+            border-left: 4px solid var(--color-red);
+        }
+
+        .row-dnf td {
+            color: #ffb3b5;
+        }
+
+        .badge-status {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-finisher {
+            background-color: rgba(27, 126, 59, 0.2);
+            color: #4ade80;
+        }
+
+        .status-dnf {
+            background-color: rgba(227, 30, 36, 0.2);
+            color: #ff5252;
+        }
+
+        .btn-diploma {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background-color: rgba(27, 126, 59, 0.2);
+            color: #4ade80;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-diploma:hover {
+            background-color: var(--color-green);
+            color: white;
+            box-shadow: 0 2px 8px rgba(27, 126, 59, 0.4);
+        }
+
+        .col-participante {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .col-placa {
+            font-family: var(--font-headings);
+            font-size: 1.2rem;
+            color: var(--color-red);
+        }
+
+        /* ---------------------------------
+           NO RESULTS MSG
+           --------------------------------- */
+        .no-results {
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .no-results p {
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .no-results svg {
+            width: 48px;
+            height: 48px;
+            opacity: 0.5;
+            margin-bottom: 10px;
+        }
+
+        /* ---------------------------------
+           FOOTER
+           --------------------------------- */
+        .footer {
+            background-color: #0b0c0d;
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-logo {
+            width: 60px;
+            height: auto;
+            margin-bottom: 15px;
+            opacity: 0.8;
+            filter: grayscale(100%);
+            transition: all 0.3s;
+        }
+
+        .footer-logo:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .contact-info a {
+            color: var(--color-red);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-info a:hover {
+            color: var(--color-red-hover);
+        }
+
+        /* ---------------------------------
+           RESPONSIVE
+           --------------------------------- */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .header-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .filters-container {
+                grid-template-columns: 1fr;
+            }
+
+            .results-table th,
+            .results-table td {
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="header-content">
+            <!-- La ruta local del logo fue especificada en el requerimiento -->
+            <img src="logo/Nuevologo.png" alt="Logo Evento" class="logo"
+                onerror="this.src='https://placehold.co/150x80/2a2e35/ffffff?text=LOGO'">
+            <div class="header-text">
+                <h1>XXIII CLASICA ALCALDIA Y CONCEJO DE COMBITA 2026</h1>
+                <h2>Resultados Oficiales</h2>
+            </div>
+        </div>
+        <div class="stats-bar">
+            <span><strong>Distancia:</strong> 68.00 Km</span>
+            <span><strong>Promedio:</strong> 42.50 Km/h</span>
+            <span><strong>Total Participantes:</strong> <span id="total-participants-stat">0</span></span>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="container">
+
+        <!-- FILTERS -->
+        <div class="filters-container">
+            <input type="text" id="filter-name" placeholder="Buscar por nombres...">
+            <input type="text" id="filter-bib" placeholder="Placa / Dorsal...">
+            <input type="text" id="filter-city" placeholder="Ciudad...">
+            <select id="filter-status">
+                <option value="all">Estado (Todos)</option>
+                <option value="diploma">Diploma</option>
+                <option value="dnf">No TerminÃ³ (DNF)</option>
+            </select>
+            <button id="btn-clear-filters" class="btn-clear">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+                Limpiar Filtros
+            </button>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs" id="tabs-container">
+            <!-- Generado por JS -->
+        </div>
+
+        <!-- TABLE CARD -->
+        <div class="results-card">
+            <div class="card-header">
+                <h3 id="current-category-name">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                    </svg>
+                    CategorÃ­a
+                </h3>
+                <span class="category-count" id="current-category-count">0 participantes</span>
+            </div>
+
+            <div class="table-responsive">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>POS</th>
+                            <th>Placa</th>
+                            <th>Participante</th>
+                            <th>Ciudad</th>
+                            <th>Tiempo Total</th>
+                            <th>DIF</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Generado por JS -->
+                    </tbody>
+                </table>
+                <div id="no-results-msg" class="no-results hidden">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <p>No se encontraron participantes que coincidan con los filtros.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <img src="logo/Nuevologo.png" alt="Logo Footer" class="footer-logo"
+            onerror="this.src='https://placehold.co/100x50/111214/ffffff?text=LOGO'">
+        <p>TCT Innovando el cronometraje electrónico de Colombia..</p>
+        <div class="contact-info">
+            <a href="https://tctcolombia.info" target="_blank">tctcolombia.info</a>
+            <span>•</span>
+            <span>Tel: +57 312 345 6789</span>
+        </div>
+    </footer>
+
+    <!-- LOGICA JAVASCRIPT -->
+    <script>
+        /**
+         * 1. DATOS DE PRUEBA (JSON Estructurado)
+         */
+        const rawMochaDataString = "[{category:\"ELITE\",finishers:[{position:1,dorsal:8,name:\"Edwar RONDON BUITRAGO\",team:\"Mauricio Toca FUNGERO Combita Tibana\",time:\"2:14:33\",difference:null},{position:2,dorsal:3,name:\"Juan Carlos LOPEZ MORENO\",team:\"GW Erco Sportfitnes\",time:\"2:15:30\",difference:'+57\"'},{position:3,dorsal:12,name:\"Henry ROSAS GUTIERREZ\",team:\"Club RAP Sogamoso\",time:\"2:15:33\",difference:\"+1:00\"},{position:4,dorsal:13,name:\"Edwin Alejandro PATIÑO BELLO\",team:\"Independiente\",time:\"2:16:06\",difference:\"+1:33\"},{position:5,dorsal:1,name:\"Wilson Enrique RODRIGUEZ AMEZQUITA\",team:\"Connect Telecomunicaciones Tuta-Alc\",time:\"2:16:07\",difference:\"+1:34\"},{position:6,dorsal:9,name:\"Brayan Estiven MOLANO ALVARADO\",team:\"Club Ciudad Duitama\",time:\"2:16:22\",difference:\"+1:49\"},{position:7,dorsal:6,name:\"Iván Arturo OJEDA SOLANO\",team:\"Juanca Punta de Anca\",time:\"2:16:25\",difference:\"+1:52\"},{position:8,dorsal:4,name:\"Miguel Eduardo FLOREZ LOPEZ\",team:\"Arenas Tlax México\",time:\"2:16:43\",difference:\"+2:10\"},{position:9,dorsal:10,name:\"Sebastián ALBARRACIN FONSECA\",team:\"Independiente\",time:\"2:18:02\",difference:\"+3:29\"},{position:10,dorsal:21,name:\"Diego SORACA CABEZAS\",team:\"Elite\",time:\"2:18:12\",difference:\"+3:39\"},{position:11,dorsal:7,name:\"David CAMARGO HERNANDEZ\",team:\"Juanca Punta de Anca\",time:\"2:28:50\",difference:\"+14:17\"}],dnf:[{dorsal:5,name:\"Sergio MATAMOROS\",team:\"SHC Cycling\"},{dorsal:16,name:\"Jhon BOHORQUEZ\",team:\"Iscarcolisiones\"},{dorsal:20,name:\"Giovanny LIZCA\",team:\"Familia Lizca\"},{dorsal:15,name:\"Faber CUCAITA\",team:\"Club Santa Roseño\"},{dorsal:18,name:\"Stiven OCHICA\",team:\"Club evolución tutense\"},{dorsal:2,name:\"Heiner PARRA\",team:\"Alcaldia De Combita Canel's Java México\"}]},{category:\"SUB23\",finishers:[{position:1,dorsal:39,name:\"Juan Diego ESTUPIÑAN DIAZ\",team:\"Team Boyacá es para Vivirla\",time:\"2:15:00\",difference:null},{position:2,dorsal:42,name:\"David Sebastian RIAÑO PINEDA\",team:\"Team Boyacá es para Vivirla\",time:\"2:15:17\",difference:'+17\"'},{position:3,dorsal:46,name:\"Camilo Alfonso ALVAREZ CUY\",team:\"Team Boyaca es Para Vivirla\",time:\"2:15:32\",difference:'+32\"'},{position:4,dorsal:40,name:\"Miller Esteban PLAZAS CAMARGO\",team:\"Team Boyacá es para Vivirla\",time:\"2:16:20\",difference:\"+1:20\"},{position:5,dorsal:43,name:\"Yeferson Johani OLIVARES FUENTES\",team:\"Team Boyacá es para Vivirla\",time:\"2:17:01\",difference:\"+2:01\"},{position:6,dorsal:78,name:\"Daniel Alejandro RINCON VALCARCEL\",team:\"Café y Ciclismo CDR\",time:\"2:17:29\",difference:\"+2:29\"},{position:7,dorsal:68,name:\"Jhon Fredy PAVA BELLO\",team:\"El gran pollo\",time:\"2:17:41\",difference:\"+2:41\"},{position:8,dorsal:47,name:\"Hugo Alejandro ALVAREZ CUY\",team:\"El gran pollo\",time:\"2:23:16\",difference:\"+8:16\"},{position:9,dorsal:55,name:\"Sergio Ivan FERNANDEZ FARFAN\",team:\"Colombielas\",time:\"2:26:06\",difference:\"+11:06\"},{position:10,dorsal:66,name:\"Santiago Andres ROBAYO JOYA\",team:\"Club Real Cycling\",time:\"2:27:02\",difference:\"+12:02\"}],dnf:[{dorsal:35,name:\"Jaider BENAVIDES\",team:\"SHC\"},{dorsal:41,name:\"Johan HERNANDEZ\",team:\"Boyacá\"},{dorsal:31,name:\"Andres UMBARILA\",team:\"SHC\"},{dorsal:70,name:\"Juan SARMIENTO\"},{dorsal:56,name:\"Julian RODRIGUEZ\"},{dorsal:73,name:\"Jairo HERNANDEZ\"},{dorsal:38,name:\"Yeison CRUZ\"},{dorsal:36,name:\"Julian SANCHEZ\",team:\"SHC\"},{dorsal:32,name:\"Jose ORTEGA\",team:\"SHC\"},{dorsal:69,name:\"Diego JIMENEZ\"},{dorsal:75,name:\"Diego PARDO\"},{dorsal:45,name:\"Anderson CASTRO\"},{dorsal:33,name:\"Brandon URREGO\",team:\"SHC\"},{dorsal:76,name:\"Neyder PORRAS\"},{dorsal:34,name:\"Camilo MONROY\",team:\"SHC\"},{dorsal:80,name:\"Edwin RUBIO\"},{dorsal:44,name:\"David UMBA\"},{dorsal:65,name:\"Nicolas LEGUIZAMON\"},{dorsal:74,name:\"Jack VARGAS\"},{dorsal:54,name:\"José VELOSA\"},{dorsal:64,name:\"Luis BOHORQUEZ\"},{dorsal:67,name:\"Carlos SANDOVAL\"},{dorsal:58,name:\"Samuel LEON\"},{dorsal:71,name:\"Andrés CANGREJO\"},{dorsal:50,name:\"Luis RODRIGUEZ\"},{dorsal:61,name:\"David FIGUEROA\"},{dorsal:37,name:\"Ricardo YEPES\",team:\"SHC\"},{dorsal:62,name:\"Manuel HERNANDEZ\"},{dorsal:72,name:\"Eber CHACON\"},{dorsal:52,name:\"Kenneth PAVA\"},{dorsal:60,name:\"Kleyber RANGEL\"},{dorsal:59,name:\"Johan RAQUIRA\"},{dorsal:51,name:\"David VARGAS\"},{dorsal:49,name:\"Daniel BARRAGAN\"},{dorsal:48,name:\"Nelson JIMENEZ\",team:\"GW Erco\"}]},{category:\"JUVENIL\",finishers:[{position:1,dorsal:113,name:\"Alejandro Stiven PAMPLONA ECHEVERRIA\",team:\"GW Erco Sportfitnes\",time:\"0:58:05\",difference:null},{position:2,dorsal:120,name:\"Jose Luis GARCIA PARRA\",team:\"Club Real cycling Duitama\",time:\"0:58:30\",difference:'+25\"'},{position:3,dorsal:112,name:\"Daniel Alejandro ROBAYO ROBAYO\",team:\"GW Erco Sportfitnes\",time:\"0:58:33\",difference:'+28\"'},{position:4,dorsal:122,name:\"Duvan Yesid URIAN CARO\",team:\"Team Sistecredito\",time:\"0:58:38\",difference:'+33\"'},{position:5,dorsal:103,name:\"Samuel Andres BERNAL URREA\",team:\"SHC Cycling Team\",time:\"0:58:49\",difference:'+44\"'},{position:6,dorsal:101,name:\"David Santiago JIMENEZ ALVAREZ\",team:\"SHC Cycling Team\",time:\"0:58:51\",difference:'+46\"'},{position:7,dorsal:142,name:\"Juan Eduardo ACUÑA PUIN\",team:\"Club Deportivo Boyaca\",time:\"0:59:07\",difference:\"+1:02\"},{position:8,dorsal:107,name:\"Kevin Julian PIRATOVA BELTRAN\",team:\"Mauricio Toca FUNGERO\",time:\"0:59:10\",difference:\"+1:05\"},{position:9,dorsal:111,name:\"Edwin Leonardo GARCIA BERNAL\",team:\"Mauricio Toca FUNGERO\",time:\"0:59:52\",difference:\"+1:47\"},{position:10,dorsal:137,name:\"Pedro Alejandro CORREA MORENO\",team:\"Club Deportivo Boyacá\",time:\"0:59:57\",difference:\"+1:52\"},{position:11,dorsal:149,name:\"Jeferson Stiven NIAMPIRA VARGAS\",team:\"Pedaleando por Ventaquemada\",time:\"1:00:14\",difference:\"+2:09\"},{position:12,dorsal:109,name:\"Omar Alberto VASQUEZ PAIPA\",team:\"Mauricio Toca FUNGERO\",time:\"1:00:20\",difference:\"+2:15\"},{position:13,dorsal:102,name:\"Sergio Alejandro CAÑON CAÑON\",team:\"SHC Cycling Team\",time:\"1:00:30\",difference:\"+2:25\"},{position:14,dorsal:147,name:\"Erick Santiago GIL RAMIREZ\",team:\"Labranza del sol\",time:\"1:00:34\",difference:\"+2:29\"},{position:15,dorsal:139,name:\"Cristian Andres CARDENAS PUENTES\",team:\"Club escuela labranza del sol\",time:\"1:00:36\",difference:\"+2:31\"},{position:16,dorsal:106,name:\"Luis Andrés SANTANA QUINTANA\",team:\"Mauricio Toca FUNGERO\",time:\"1:00:37\",difference:\"+2:32\"},{position:17,dorsal:144,name:\"Arbey Fernando AVILA PEÑA\",team:\"Evolución tutense\",time:\"1:00:59\",difference:\"+2:54\"},{position:18,dorsal:108,name:\"Juan Martin ARTUNDUAGA PARRA\",team:\"Mauricio Toca FUNGERO\",time:\"1:01:18\",difference:\"+3:13\"},{position:19,dorsal:133,name:\"Julian Esteban CAMARGO PEÑA\",team:\"Arcabuco es ciclismo\",time:\"1:01:52\",difference:\"+3:47\"},{position:20,dorsal:114,name:\"Ronald Ferney SILVA ESTUPIÑAN\",team:\"CLUB MR2 PAIPA\",time:\"1:01:54\",difference:\"+3:49\"},{position:21,dorsal:119,name:\"Andres Felipe ARAQUE PARADA\",team:\"Club Real cycling Duitama\",time:\"1:02:18\",difference:\"+4:13\"},{position:22,dorsal:123,name:\"Edison Ferney SANCHEZ TORRES\",team:\"Team Guerreros Paipa\",time:\"1:02:40\",difference:\"+4:35\"},{position:23,dorsal:121,name:\"Andrés Mauricio VARGAS PINTO\",team:\"Club Real cycling Duitama\",time:\"1:02:49\",difference:\"+4:44\"},{position:24,dorsal:134,name:\"David Alejandro BONILLA CALIXTO\",team:\"Asadero gran pollo\",time:\"1:03:03\",difference:\"+4:58\"},{position:25,dorsal:148,name:\"David Felipe PAN BONILLA\",team:\"Liga de Casanare\",time:\"1:03:52\",difference:\"+5:47\"},{position:26,dorsal:150,name:\"Daniel Felipe VARGAS TORRES\",team:\"Super tienda la 26\",time:\"1:04:05\",difference:\"+6:00\"},{position:27,dorsal:140,name:\"Nicolas VELASCO ARDILA\",team:\"Club hormigueros de Bucaramanga\",time:\"1:04:18\",difference:\"+6:13\"},{position:28,dorsal:129,name:\"Keled David PADILLA HOLGUIN\",team:\"Club Daniel rincón\",time:\"1:04:38\",difference:\"+6:33\"}],dnf:[{dorsal:132,name:\"Luis Fernando TORRES\"},{dorsal:131,name:\"Diego NOMESQUE\"},{dorsal:110,name:\"Jhon MOTIVAR\"},{dorsal:118,name:\"Jose CIPAGAUTA\"},{dorsal:124,name:\"Diego SANCHEZ\"},{dorsal:145,name:\"Sebastian BURGOS\"},{dorsal:143,name:\"Johan CORREA\"},{dorsal:125,name:\"Julián CAMACHO\"},{dorsal:104,name:\"Deiber AVILA\"},{dorsal:105,name:\"Kevin ROZO\"},{dorsal:141,name:\"Maicol ALVARADO\"},{dorsal:146,name:\"Harold CRUZ\"},{dorsal:136,name:\"Hector ROJAS\"},{dorsal:116,name:\"Manuel HERNANDEZ\"},{dorsal:135,name:\"David CARMONA\"},{dorsal:130,name:\"Oscar TOBITO\"},{dorsal:117,name:\"Jesús BECERRA\"},{dorsal:127,name:\"Julián SUESCA\"},{dorsal:115,name:\"Julián RODRIGUEZ\"}]},{category:\"PREJUVENIL\",finishers:[{position:1,dorsal:175,name:\"Juan Camilo APONTE BUITRAGO\",team:\"Escuela pedaleando por un sueño ALC Samaca\",time:\"0:43:10\",difference:null},{position:2,dorsal:179,name:\"Johan Andrey RAMIREZ ESPITIA\",team:\"Escuela pedaleando por un sueño ALC Samaca\",time:\"0:43:15\",difference:'+5\"'},{position:3,dorsal:200,name:\"Juan David CHICINO\",team:\"Team Guerreros Paipa Gelchi\",time:\"0:43:43\",difference:'+33\"'},{position:4,dorsal:166,name:\"Ronal Andres QUINCHO CADENA\",team:\"Mauricio Toca FUNGERO Combita Tibana Umbita\",time:\"0:44:08\",difference:'+58\"'},{position:5,dorsal:195,name:\"Daniel Esteban BARRERA CARVAJAL\",team:\"Asaderos el Gran Pollo Team Alcaldía de Nobsa\",time:\"0:44:19\",difference:\"+1:09\"},{position:6,dorsal:177,name:\"Yeison Andres GARCIA SANCHEZ\",team:\"Escuela pedaleando por un sueño ALC Samaca\",time:\"0:44:30\",difference:\"+1:20\"},{position:7,dorsal:165,name:\"Manuel Esteban FUENTES LARGO\",team:\"Mauricio Toca FUNGERO Combita Tibana Umbita\",time:\"0:44:47\",difference:\"+1:37\"},{position:8,dorsal:169,name:\"Juan Jose ESPINOSA ORJUELA\",team:\"Mauricio Toca FUNGERO Combita Tibana Umbita\",time:\"0:45:00\",difference:\"+1:50\"},{position:9,dorsal:201,name:\"Thomas Felipe PORRAS BALLESTEROS\",team:\"Team Garroteros\",time:\"0:45:23\",difference:\"+2:13\"},{position:10,dorsal:176,name:\"Samuel Felipe MESA SIATAMA\",team:\"Escuela pedaleando por un sueño ALC Samaca\",time:\"0:45:23\",difference:\"+2:13\"},{position:11,dorsal:164,name:\"Julián Camilo CASTEBLANCO RUBIO\",team:\"Mauricio Toca FUNGERO Combita Tibana Umbita\",time:\"0:45:32\",difference:\"+2:22\"},{position:12,dorsal:194,name:\"Andres Mauricio BARRERA VARGAS\",team:\"Asaderos el gran pollo - sierra bike\",time:\"0:45:37\",difference:\"+2:27\"},{position:13,dorsal:205,name:\"Cristhian Alejandro VELOSA HUERTAS\",team:\"Familia velosa\",time:\"0:45:42\",difference:\"+2:32\"},{position:14,dorsal:174,name:\"Edwin Fernando GOMEZ DIAZ\",team:\"TEAM MINERA EL MORRO\",time:\"0:45:57\",difference:\"+2:47\"},{position:15,dorsal:188,name:\"Oscar Andres CASTAÑEDA MARIN\",team:\"Club Deportivo Boyacá\",time:\"0:46:03\",difference:\"+2:53\"},{position:16,dorsal:198,name:\"Cadel Evans FUYA BERNAL\",team:\"Fundación manos unidas\",time:\"0:46:21\",difference:\"+3:11\"},{position:17,dorsal:204,name:\"David Sebastián MANCERA MORA\",team:\"Mamá\",time:\"0:46:31\",difference:\"+3:21\"},{position:18,dorsal:162,name:\"Andres Mauricio TOCA RODRIGUEZ\",team:\"Mauricio Toca FUNGERO Combita Tibana Umbita\",time:\"0:46:42\",difference:\"+3:32\"},{position:19,dorsal:191,name:\"Daniel Santiago PALACIO RODRIGUEZ\",team:\"SHC Cycling Team\",time:\"0:46:54\",difference:\"+3:44\"},{position:20,dorsal:163,name:\"Yefer BOHORQUEZ\",team:\"Mauricio Toca FUNGERO Combita Tibana Umbita\",time:\"0:47:05\",difference:\"+3:55\"},{position:21,dorsal:206,name:\"Juan Pablo BUSTAMANTE RUDA\",team:\"Escuela de ciclismo pedaleando por un futuro\",time:\"0:47:20\",difference:\"+4:10\"},{position:22,dorsal:184,name:\"Uriel Sebastian PARRA ALVAREZ\",team:\"Club Daniel Rincón\",time:\"0:47:30\",difference:\"+4:20\"},{position:23,dorsal:190,name:\"Nicolas ANGEL CASTIBLANCO\",team:\"SHC Cycling Team\",time:\"0:47:40\",difference:\"+4:30\"},{position:24,dorsal:173,name:\"Ronal Miguel BARRERA MOLINA\",team:\"TEAM MINERA EL MORRO\",time:\"0:47:48\",difference:\"+4:38\"},{position:25,dorsal:170,name:\"Dairo Fabian PEREZ VALBUENA\",team:\"TEAM MINERA EL MORRO\",time:\"0:48:22\",difference:\"+5:12\"},{position:26,dorsal:189,name:\"Andres Felipe RAMIREZ SIERRA\",team:\"Club Deportivo Boyacá\",time:\"0:48:53\",difference:\"+5:43\"},{position:27,dorsal:202,name:\"Stick Fernando REIRAN BERNAL\",team:\"Team Siachoque ECFCS\",time:\"0:49:04\",difference:\"+5:54\"},{position:28,dorsal:196,name:\"Maicol Ferney GONZALEZ QUINTERO\",team:\"Arcabuco es ciclismo\",time:\"0:49:49\",difference:\"+6:39\"},{position:29,dorsal:171,name:\"Kevin Santiago DURAN CUCUNUBA\",team:\"TEAM MINERA EL MORRO\",time:\"0:49:52\",difference:\"+6:42\"},{position:30,dorsal:172,name:\"Santiago Esteban CRUZ MENDIVELSO\",team:\"TEAM MINERA EL MORRO\",time:\"0:49:53\",difference:\"+6:43\"},{position:31,dorsal:178,name:\"Sergio Leonardo CRUZ GIL\",team:\"Escuela pedaleando por un sueño ALC Samaca\",time:\"0:50:01\",difference:\"+6:51\"},{position:32,dorsal:208,name:\"Juan Felipe GOMEZ MONTAÑA\",team:\"ALCALDIA IZA - CLUB DE CICLISMO TEAM NOBSA\",time:\"0:50:10\",difference:\"+7:00\"},{position:33,dorsal:199,name:\"Samuel Santiago SALAZAR PINEDA\",team:\"Fundación Manos unidas, Muebles zafi\",time:\"0:50:14\",difference:\"+7:04\"},{position:34,dorsal:187,name:\"Emmanuel MALDONADO MUÑOZ\",team:\"Club Deportivo Boyacá\",time:\"0:50:35\",difference:\"+7:25\"},{position:35,dorsal:168,name:\"Edison Fabian BARON SANCHEZ\",team:\"Mauricio Toca FUNGERO Combita Tibana Umbita\",time:\"0:50:35\",difference:\"+7:25\"},{position:36,dorsal:180,name:\"Cristian Orlando SANCHEZ ESPINOSA\",team:\"Escuela pedaleando por un sueño ALC Samaca\",time:\"0:51:08\",difference:\"+7:58\"}],dnf:[{dorsal:197,name:\"Kevin Alexander ROJAS ROBLES\",team:\"Arcabuco es ciclismo\"},{dorsal:181,name:\"Jhoan Sebastian SARMIENTO SALAS\",team:\"Alcaldia de Combita\"},{dorsal:185,name:\"Nicolás CAMPO HERNANDEZ\",team:\"Club Daniel Rincon\"},{dorsal:167,name:\"Daniel Alejandro GONZALEZ PULIDO\",team:\"Mauricio Toca FUNGERO Combita Tibana Umbita\"},{dorsal:203,name:\"Hernan Camilo TORRES AGUILAR\",team:\"Sora\"},{dorsal:182,name:\"Nicolas MALAVER SAMACA\",team:\"Alcaldia de Combita\"},{dorsal:209,name:\"Daniel Jeanpolo RODRIGUEZ RODRIGUEZ\",team:\"Alcaldía de Oicata\"},{dorsal:193,name:\"Julian Leonardo RUBIO REYES\",team:\"Campeones de Chiquiza\"},{dorsal:192,name:\"Diego Hernan RUBIO CRUZ\",team:\"Campeones de Chiquiza\"},{dorsal:183,name:\"Jhoan Josue MATTA RODRIGUEZ\",team:\"Alcaldia de Combita\"},{dorsal:161,name:\"Sebastián Matias GOMEZ SALAMANCA\",team:\"Mauricio Toca FUNGERO Combita Tibana Umbita\"}]}]";
+
+
+        const parsedMochaData = new Function('return ' + rawMochaDataString)();
+        const categories = parsedMochaData.map(cat => {
+            const id = cat.category.toLowerCase().replace(/\s+/g, '');
+            const nameText = cat.category;
+            let participants = [];
+            if (cat.finishers) {
+                cat.finishers.forEach(p => {
+                    participants.push({
+                        pos: p.position,
+                        bib: String(p.dorsal),
+                        name: p.name,
+                        city: p.team || '',
+                        country: 'COL',
+                        laps: '-',
+                        time: p.time,
+                        diff: p.difference || '-',
+                        status: 'diploma'
+                    });
+                });
+            }
+            if (cat.dnf) {
+                cat.dnf.forEach(p => {
+                    participants.push({
+                        pos: 'DNF',
+                        bib: String(p.dorsal),
+                        name: p.name,
+                        city: p.team || '',
+                        country: 'COL',
+                        laps: '-',
+                        time: '-',
+                        diff: '-',
+                        status: 'dnf'
+                    });
+                });
+            }
+            return { id, name: nameText, participants };
+        });
+
+        /**
+        * 2. ESTADO DE LA APLICACIÓN
+        */
+        const state = {
+            activeCategoryId: categories[0].id,
+            filters: {
+                name: '',
+                bib: '',
+                city: '',
+                status: 'all'
+            }
+        };
+
+        /**
+        * 3. REFERENCIAS AL DOM
+        */
+        const tabsContainer = document.getElementById('tabs-container');
+        const tableBody = document.getElementById('table-body');
+        const noResultsMsg = document.getElementById('no-results-msg');
+        const categoryNameTitle = document.getElementById('current-category-name');
+        const categoryCountBadge = document.getElementById('current-category-count');
+        const totalParticipantsStat = document.getElementById('total-participants-stat');
+
+        // Filtros
+        const filterName = document.getElementById('filter-name');
+        const filterBib = document.getElementById('filter-bib');
+        const filterCity = document.getElementById('filter-city');
+        const filterStatus = document.getElementById('filter-status');
+        const btnClearFilters = document.getElementById('btn-clear-filters');
+
+        /**
+        * 4. INICIALIZACIÓN Y RENDERIZADO
+        */
+        function initApp() {
+            renderTabs();
+            calculateTotalParticipants();
+            applyFiltersAndRender();
+            setupEventListeners();
+        }
+
+        // Calcula el total de participantes en todas las categorías
+        function calculateTotalParticipants() {
+            let total = 0;
+            categories.forEach(cat => total += cat.participants.filter(p => p.status === 'diploma').length);
+            totalParticipantsStat.textContent = total;
+        }
+
+        // Renderiza los botones de pestañas dinÃ¡micamente
+        function renderTabs() {
+            tabsContainer.innerHTML = '';
+            categories.forEach(category => {
+                const btn = document.createElement('button');
+                btn.className = `tab-btn ${category.id === state.activeCategoryId ? 'active' : ''}`;
+                btn.textContent = category.name;
+                btn.dataset.id = category.id;
+
+                btn.addEventListener('click', () => {
+                    // Update Active State
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    state.activeCategoryId = category.id;
+                    applyFiltersAndRender();
+                });
+
+                tabsContainer.appendChild(btn);
+            });
+        }
+
+        // Obtiene la clase CSS de la medalla basada en la posiciÃ³n
+        function getPosStyle(pos, status) {
+            if (status === 'DNF') return '';
+            if (pos === 1) return 'pos-medal pos-1';
+            if (pos === 2) return 'pos-medal pos-2';
+            if (pos === 3) return 'pos-medal pos-3';
+            return '';
+        }
+
+        // Renderiza las filas de la tabla
+        function renderTable(participants) {
+            tableBody.innerHTML = '';
+
+            if (participants.length === 0) {
+                tableBody.parentElement.classList.add('hidden');
+                noResultsMsg.classList.remove('hidden');
+                return;
+            }
+
+            tableBody.parentElement.classList.remove('hidden');
+            noResultsMsg.classList.add('hidden');
+
+            participants.forEach(p => {
+                const isDNF = p.status === 'DNF';
+                const rowClass = isDNF ? 'row-dnf' : '';
+                const posClass = getPosStyle(p.pos, p.status);
+
+                // Formatear PosiciÃ³n (Medalla o Texto Normal)
+                const posHtml = posClass
+                    ? `<span class="${posClass}">${p.pos}</span>`
+                    : `<span>${p.pos}</span>`;
+
+                // Badge Estado
+                let statusHtml = '';
+                if (p.status === 'diploma') {
+                    statusHtml = `<a href="Diplomas/${p.bib}.png" target="_blank" class="btn-diploma" title="Descargar / Ver Diploma">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        <span>Diploma</span>
+                    </a>`;
+                } else {
+                    const statusBadgeClass = isDNF ? 'status-dnf' : 'status-finisher';
+                    statusHtml = `<span class="badge-status ${statusBadgeClass}">DNF</span>`;
+                }
+
+                const tr = document.createElement('tr');
+                tr.className = rowClass;
+                tr.innerHTML = `
+    <td>${posHtml}</td>
+    <td class="col-placa">#${p.bib}</td>
+    <td class="col-participante">${p.name}</td>
+    <td>${p.city}</td>
+    <td><strong>${p.time}</strong></td>
+    <td style="color: var(--text-muted);">${p.diff}</td>
+    <td>${statusHtml}</td>
+    `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        /**
+        * 5. LÃ“GICA DE FILTROS REAL-TIME
+        */
+        function applyFiltersAndRender() {
+            // Encuentra la categorÃ­a activa
+            const category = categories.find(c => c.id === state.activeCategoryId);
+
+            if (!category) return;
+
+            // Actualiza los headers de la tarjeta
+            categoryNameTitle.innerHTML = `
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-green)">
+        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+    </svg>
+    ${category.name}
+    `;
+
+            // Aplica los filtros
+            const filteredParticipants = category.participants.filter(p => {
+                const matchName = p.name.toLowerCase().includes(state.filters.name);
+                const matchBib = p.bib.toLowerCase().includes(state.filters.bib);
+                const matchCity = p.city.toLowerCase().includes(state.filters.city);
+
+                let matchStatus = true;
+                if (state.filters.status !== 'all') {
+                    matchStatus = p.status.trim().toLowerCase() === state.filters.status.trim().toLowerCase();
+                }
+
+                return matchName && matchBib && matchCity && matchStatus;
+            });
+
+            // Actualiza el contador de la categorÃ­a (mostrando total filtrado vs total real o simplemente los encontrados)
+            categoryCountBadge.textContent = `${filteredParticipants.length} Resultados`;
+
+            // Renderiza en DOM
+            renderTable(filteredParticipants);
+        }
+
+        // Listener setup para todos los inputs
+        function setupEventListeners() {
+            // Inputs Textuales
+            [
+                { el: filterName, key: 'name' },
+                { el: filterBib, key: 'bib' },
+                { el: filterCity, key: 'city' }
+            ].forEach(({ el, key }) => {
+                el.addEventListener('input', (e) => {
+                    state.filters[key] = e.target.value.toLowerCase().trim();
+                    applyFiltersAndRender();
+                });
+            });
+
+            // Select Status
+            filterStatus.addEventListener('change', (e) => {
+                state.filters.status = e.target.value;
+                applyFiltersAndRender();
+            });
+
+            // Botón Limpiar
+            btnClearFilters.addEventListener('click', () => {
+                // Reset State
+                state.filters = {
+                    name: '',
+                    bib: '',
+                    city: '',
+                    status: 'all'
+                };
+
+                // Reset DOM Inputs
+                filterName.value = '';
+                filterBib.value = '';
+                filterCity.value = '';
+                filterStatus.value = 'all';
+
+                applyFiltersAndRender();
+            });
+        }
+
+        // Boot
+        document.addEventListener('DOMContentLoaded', initApp);
+
+    </script>
+</body>
+
+</html>
